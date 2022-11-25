@@ -11,7 +11,7 @@
         <tbody>
         <tr>
             <td><label for="todo">Todo :</label></td>
-            <td><input type="text" id="todo" name="todo"></input></td>
+            <td><input type="text" id="todo" name="todo"></td>
         </tr>
         <tr>
             <td></td>
@@ -30,7 +30,7 @@
         <th><input type="text" name="search" id="search"></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="todolistBody">
     <tr>
         <td><input type="button" value="Done"></td>
         <td>Todo Description</td>
@@ -42,6 +42,37 @@
 
     const todolist = [];
 
+    function clearTodolist() {
+        const todolistBody = document.getElementById("todolistBody");
+        while(todolistBody.firstChild){
+            todolistBody.removeChild(todolistBody.firstChild);
+        }
+    }
+
+    function displayTodoList(){
+        clearTodolist();
+
+        for (let i = 0; i < todolist.length; i++) {
+            const todo = todolist[i];
+
+            const tr = document.createElement("tr");
+            const tdButton = document.createElement("td");
+            tr.appendChild(tdButton);
+
+            const buttonDone = document.createElement("input");
+            buttonDone.type = "button";
+            buttonDone.value = "Done";
+            tdButton.appendChild(buttonDone);
+
+            const tdTodo = document.createElement("td");
+            tdTodo.textContent = todo;
+            tr.appendChild(tdTodo);
+
+            const todolistBody = document.getElementById("todolistBody");
+            todolistBody.appendChild(tr);
+        }
+    }
+
     document.forms['todoForm'].onsubmit = function (event) {
         event.preventDefault();
 
@@ -50,7 +81,8 @@
 
         document.forms['todoForm'].reset();
 
-        console.log(todoList);
+        console.log(todolist);
+        displayTodoList();
     }
 </script>
 

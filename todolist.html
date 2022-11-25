@@ -67,7 +67,7 @@
         const buttonDone = document.createElement("input");
         buttonDone.type = "button";
         buttonDone.value = "Done";
-        buttonDone.onclick = function (){
+        buttonDone.onclick = function (index){
             removeTodoList(index);
         };
         tdButton.appendChild(buttonDone);

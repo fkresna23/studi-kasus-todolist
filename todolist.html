@@ -54,6 +54,11 @@
         }
     }
 
+    function removeTodoList(index) {
+       todolist.splice(index, 1);
+       displayTodoList();
+    }
+
     function addTodolist(todo){
         const tr = document.createElement("tr");
         const tdButton = document.createElement("td");
@@ -62,6 +67,9 @@
         const buttonDone = document.createElement("input");
         buttonDone.type = "button";
         buttonDone.value = "Done";
+        buttonDone.onclick = function (){
+            removeTodoList(index);
+        };
         tdButton.appendChild(buttonDone);
 
         const tdTodo = document.createElement("td");
@@ -75,14 +83,15 @@
     function displayTodoList(){
         clearTodolist();
 
-        for (let i = 0; i < todolist.length; i++) {
-            const todo = todolist[i];
+       for (let i = 0; i < todolist.length; i++) {
+           const todo = todolist[i];
 
-            const searchText = document.getElementById("search").value.toLowerCase();
-            if(todo.toLowerCase().includes(searchText)){
-                addTodolist(todo);
-            }
-        }
+           const searchText = document.getElementById("search").value.toLowerCase();
+
+           if(todo.toLowerCase().includes(searchText)){
+               addTodolist(i, todo)
+           }
+       }
     }
 
     document.forms['todoForm'].onsubmit = function (event) {
